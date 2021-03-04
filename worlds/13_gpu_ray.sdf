@@ -1,0 +1,893 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <physics name='default_physics' default='0' type='ode'>
+      <max_step_size>0.01</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>100</real_time_update_rate>
+    </physics>
+    <plugin name='disable_physics' filename='libcustom_gazebo_disable_physics.so'/>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>-16 -27 18 0 0.5 1</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <model name='lidar0'>
+      <pose>0 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar1'>
+      <pose>1 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar2'>
+      <pose>2 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar3'>
+      <pose>3 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar4'>
+      <pose>4 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar5'>
+      <pose>5 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar6'>
+      <pose>6 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar7'>
+      <pose>7 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar8'>
+      <pose>8 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar9'>
+      <pose>9 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar10'>
+      <pose>10 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar11'>
+      <pose>11 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <model name='lidar12'>
+      <pose>12 0 0 0 -0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+        </inertial>
+        <visual name='visual-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='visual-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        <collision name='collision-base'>
+          <pose>0 0 -0.0145 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.041</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name='collision-top'>
+          <pose>0 0 0.0205 0 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.021</radius>
+              <length>0.029</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <sensor name='laser' type='gpu_ray'>
+          <pose>0.01 0 0.0175 0 -0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1072</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26889</min_angle>
+                <max_angle>2.2689</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <always_on>1</always_on>
+          <update_rate>34</update_rate>
+          <visualize>0</visualize>
+        </sensor>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+  </world>
+</sdf>
